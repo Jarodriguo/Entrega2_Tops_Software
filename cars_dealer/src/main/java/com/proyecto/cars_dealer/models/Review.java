@@ -7,6 +7,7 @@ import lombok.*;
 @Entity
 @Table(name = "Reviews")
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Review {
     
@@ -26,6 +27,15 @@ public class Review {
     @Column(columnDefinition = "TEXT")
     private String comment;
 
-    @NotEmpty(message = "El modelo del auto no puede estar vacío")
-    private String carModel;
+    // Relación con el usuario que hizo la review
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    // Relación con el carro al que se le hizo la review
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_id", nullable = false)
+    private Car car;
+
+
 }
