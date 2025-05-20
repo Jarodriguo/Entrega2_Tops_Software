@@ -8,7 +8,6 @@ import lombok.*;
 @Table(name = "Reviews")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Review {
     
     @Id
@@ -36,6 +35,14 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
+
+    public Review(String title, Integer rating, String comment, User user, Car car) {
+        this.title = title;
+        this.rating = rating;
+        this.comment = comment;
+        this.user = user;
+        this.car = car;
+    }
 
 
 }
